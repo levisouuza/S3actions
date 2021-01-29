@@ -14,14 +14,20 @@ import os
 class S3transfer:
 
     def __init__(self):
-
+        """
+        self.Access_Key_ID: Access Key Id AWS account user
+        self.Secret_Access_Key: Secret Access Key AWS account user
+        self.Region: Region Bucket 
+        """
         self.Access_Key_ID = Access_Key_ID
         self.Secret_Access_Key = Secret_Access_Key
         self.Region = Region
-
+        
+        # create session with AWS credentials
         self.session = boto3.session.Session(aws_access_key_id=self.Access_Key_ID,
                                              aws_secret_access_key=self.Secret_Access_Key,
                                              region_name=self.Region)
+        # create client AWS S3 service
         self.s3_client = self.session.resource(service_name='s3')
 
     def s3_upload(self, file_input, bucket, object_name=None):
